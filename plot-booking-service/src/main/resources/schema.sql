@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS plots;
+
+CREATE TABLE plots (
+  id   INTEGER IDENTITY PRIMARY KEY,
+  status VARCHAR(10) NOT NULL,
+  owner VARCHAR(80)
+);
