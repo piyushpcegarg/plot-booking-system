@@ -2,6 +2,7 @@ package com.piyushgarg.service;
 
 import java.util.List;
 
+import com.github.javafaker.Faker;
 import com.piyushgarg.error.PlotAlreadyBookedException;
 import com.piyushgarg.error.PlotNotFoundException;
 import com.piyushgarg.model.Plot;
@@ -15,9 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlotService {
 
     private PlotRepository plotRepository;
+    private Faker faker;
 
     public PlotService(PlotRepository plotRepository) {
         this.plotRepository = plotRepository;
+        this.faker = new Faker();
     }
 
     public List<Plot> getPlots() {
@@ -41,6 +44,7 @@ public class PlotService {
         } else {
 
             plot.setStatus(StatusEnum.BOOKED);
+            plot.setOwner(faker.name().firstName());
             plotRepository.save(plot);
         }
         return plot;
