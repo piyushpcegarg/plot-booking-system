@@ -1,11 +1,19 @@
+import { Color } from '@material-ui/lab/Alert';
+
 export enum StatusEnum {
-  AVAILABLE = "AVAILABLE",
-  BOOKED = "BOOKED"
+  AVAILABLE = 'AVAILABLE',
+  BOOKED = 'BOOKED'
+}
+
+export interface Notification {
+  open: boolean;
+  message?: string;
+  severity?: Color;
 }
 
 interface Plot {
   id: number;
-  status: String;
+  status: StatusEnum;
   owner: string;
 }
 

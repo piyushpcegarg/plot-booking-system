@@ -2,25 +2,26 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import './App.css';
 import PlotCard from './PlotCard';
-import Plot from './model';
+import Plot, { Notification } from './model';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
 function App() {
 
   const [plots, setPlots] = React.useState<Plot[]>([]);
-  const [open, setOpen] = React.useState(true);
-  const [message, setMessage] = React.useState("Plot booked");
+  const [notification, setNotification] = React.useState<Notification>({
+    open: false
+  });
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    setNotification({open: false});
   };
 
   React.useEffect(() => {
@@ -31,19 +32,19 @@ function App() {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [notification]);
 
   return (
     <div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          {message}
+      <Snackbar open={notification.open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={notification.severity}>
+          {notification.message}
         </Alert>
       </Snackbar>
       <Grid container spacing={1}>
         {plots.map((plot) => (
           <Grid key={plot.id} item xs={4} sm={2}>
-            <PlotCard {...plot}></PlotCard>
+            <PlotCard plot={plot} setNotification={setNotification}></PlotCard>
           </Grid>
         ))}
       </Grid>
