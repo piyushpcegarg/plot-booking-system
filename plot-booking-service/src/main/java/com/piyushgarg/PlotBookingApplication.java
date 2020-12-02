@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.reactive.config.CorsRegistry;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 @SpringBootApplication
 public class PlotBookingApplication {
@@ -15,9 +15,9 @@ public class PlotBookingApplication {
 	}
 
 	@Bean
-	public WebMvcConfigurer corsConfigurer() {
+	public WebFluxConfigurer corsConfigurer() {
 
-		return new WebMvcConfigurer() {
+		return new WebFluxConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry

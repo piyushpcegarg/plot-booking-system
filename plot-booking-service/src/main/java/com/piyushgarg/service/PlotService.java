@@ -5,20 +5,24 @@ import java.util.List;
 import com.github.javafaker.Faker;
 import com.piyushgarg.error.PlotAlreadyBookedException;
 import com.piyushgarg.error.PlotNotFoundException;
+import com.piyushgarg.event.PlotBookedEvent;
 import com.piyushgarg.model.Plot;
 import com.piyushgarg.model.StatusEnum;
 import com.piyushgarg.repository.PlotRepository;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PlotService {
 
+    private final ApplicationEventPublisher publisher;
     private PlotRepository plotRepository;
     private Faker faker;
 
-    public PlotService(PlotRepository plotRepository) {
+    public PlotService(ApplicationEventPublisher publisher, PlotRepository plotRepository) {
+        this.publisher = publisher;
         this.plotRepository = plotRepository;
         this.faker = new Faker();
     }
@@ -47,6 +51,7 @@ public class PlotService {
             plot.setOwner(faker.name().firstName());
             plotRepository.save(plot);
         }
+        publisher.publishEvent(new PlotBookedEvent(plot));
         return plot;
     }
 }

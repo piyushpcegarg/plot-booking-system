@@ -26,13 +26,24 @@ function App() {
 
   React.useEffect(() => {
 
-    fetch('http://localhost:8080/plots')
+    fetch('http://localhost:8080/plots/')
       .then(response => response.json())
       .then(data => setPlots(data))
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [notification]);
+    }, []);
+
+  React.useEffect(() => {
+
+    const eventSource = new EventSource('http://localhost:8080/plots/events'); 
+    eventSource.onopen = (event: any) => console.log('open', event); 
+    eventSource.onmessage = (event: any) => {
+      setPlots(JSON.parse(event.data));
+    };
+    eventSource.onerror = (event: any) => console.log('error', event);
+
+  }, []);
 
   return (
     <div>
