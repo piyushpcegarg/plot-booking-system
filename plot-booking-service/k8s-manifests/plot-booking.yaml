@@ -23,15 +23,10 @@ spec:
     - host: api.yourdomain.com
       http:
         paths:
-          - path: /plots
-            pathType: Prefix
-            backend:
-              # This assumes plot-booking-service exists and routes to healthy endpoints
-              serviceName: plot-booking-service
-              servicePort: 80
           - path: /plots/*
             pathType: Prefix
             backend:
+              # This assumes plot-booking-service exists and routes to healthy endpoints
               serviceName: plot-booking-service
               servicePort: 80
 ---
