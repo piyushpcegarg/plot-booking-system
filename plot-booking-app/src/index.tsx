@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
 import './index.css';
-import App from './App';
+import PlotBookingApp from './PlotBookingApp';
 import reportWebVitals from './reportWebVitals';
+import firebase from 'firebase/app';
+import firebaseConfig from './FirebaseConfig';
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <PlotBookingApp />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
