@@ -46,7 +46,7 @@ As TLS is enabled on ingress, please follow below instructions to create secret.
 Create self signed key and certificate using below command
 
 ```
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=api.mypaper.co.in/O=api.mypaper.co.in"
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=api.yourdomain.com/O=api.yourdomain.com"
 ```
 
 Above command creates tls.key and tls.crt file
