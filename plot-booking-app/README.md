@@ -39,3 +39,19 @@ http://localhost:3000
 You should get below response
 
 ![plot-booking-app](plot-booking-app.png)
+
+If you are using firebase hosting in production then below step is not required.
+
+To use firebase and firebase authentication, create .env file in root folder(plot-booking-app) with below content to test things locally.
+
+```
+REACT_APP_API_KEY = "YOUR_PROJECT_API_KEY"
+REACT_APP_AUTH_DOMAIN = "YOUR_PROJECT_AUTH_DOMAIN"
+REACT_APP_DATABASE_URL = "YOUR_PROJECT_DATABASE_URL"
+REACT_APP_PROJECT_ID = "YOUR_PROJECT_PROJECT_ID"
+REACT_APP_STORAGE_BUCKET = "YOUR_PROJECT_STORAGE_BUCKET"
+REACT_APP_MESSAGING_SENDER_ID = "YOUR_PROJECT_MESSAGING_SENDER_ID"
+REACT_APP_APP_ID = "YOUR_PROJECT_APP_ID"
+REACT_APP_MEASUREMENT_ID = "YOUR_PROJECT_MEASUREMENT_ID"
+```
+
