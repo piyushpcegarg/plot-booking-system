@@ -37,6 +37,7 @@ function App() {
   const [notification, setNotification] = React.useState<Notification>({
     open: false
   });
+  const accessTokenRef = React.useRef('');
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
@@ -47,13 +48,22 @@ function App() {
 
   React.useEffect(() => {
 
-    fetch('http://localhost:8080/plots/')
+    firebase.auth().currentUser?.getIdToken().then((token: string) => {
+      
+      accessTokenRef.current = token;
+
+      fetch('http://localhost:8080/plots/', {
+        headers: {
+          'Authorization': 'Bearer ' + accessTokenRef.current
+        }
+      })
       .then(response => response.json())
       .then(data => setPlots(data))
       .catch((error) => {
         console.error('Error:', error);
       });
-    }, []);
+    });
+  }, []);
 
   React.useEffect(() => {
 
@@ -91,7 +101,7 @@ function App() {
       <Grid container spacing={1}>
         {plots.map((plot) => (
           <Grid key={plot.id} item xs={4} sm={2}>
-            <PlotCard plot={plot} setNotification={setNotification}></PlotCard>
+            <PlotCard plot={plot} setNotification={setNotification} accessToken={accessTokenRef.current}></PlotCard>
           </Grid>
         ))}
       </Grid>

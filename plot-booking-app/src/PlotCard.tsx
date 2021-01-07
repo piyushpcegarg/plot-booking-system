@@ -10,17 +10,22 @@ import { Color } from '@material-ui/lab/Alert';
 interface Props {
   plot: Plot;
   setNotification: (notification: Notification) => void;
+  accessToken: string;
 }
 
 const PlotCard = ({
   plot,
-  setNotification
+  setNotification,
+  accessToken
 }: Props ) => {
 
   const bookPlot = (id: number) => {
 
     fetch('http://localhost:8080/plots/' + id, {
         method: 'PUT',
+        headers: {
+          'Authorization': 'Bearer ' + accessToken
+        }
       })
       .then(response => response.json())
       .then(data => {
