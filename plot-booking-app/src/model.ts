@@ -1,4 +1,4 @@
-import { Color } from '@material-ui/lab/Alert';
+import { AlertColor } from '@mui/material/Alert';
 
 export enum StatusEnum {
   AVAILABLE = 'AVAILABLE',
@@ -8,7 +8,7 @@ export enum StatusEnum {
 export interface Notification {
   open: boolean;
   message?: string;
-  severity?: Color;
+  severity?: AlertColor;
 }
 
 interface Plot {

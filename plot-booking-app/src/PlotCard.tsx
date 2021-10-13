@@ -1,11 +1,11 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-import CardHeader from '@material-ui/core/CardHeader';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import CardHeader from '@mui/material/CardHeader';
 import Plot, { StatusEnum, Notification } from './model';
-import { CardContent, Typography } from '@material-ui/core';
-import { Color } from '@material-ui/lab/Alert';
+import { CardContent, Typography } from '@mui/material';
+import { AlertColor } from '@mui/material/Alert';
 
 interface Props {
   plot: Plot;
@@ -25,7 +25,7 @@ const PlotCard = ({
       .then(response => response.json())
       .then(data => {
         let message = 'Plot Booked successfully';
-        let severity: Color = 'success';
+        let severity: AlertColor = 'success';
         if (data.error) {
           message = data.message;
           severity = 'error';
