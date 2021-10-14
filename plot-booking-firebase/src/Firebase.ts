@@ -1,8 +1,5 @@
-// This import loads the firebase namespace along with all its type information.
-import firebase from 'firebase/app';
-
-// These imports load individual services into the firebase namespace.
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,7 +13,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+initializeApp(firebaseConfig);
+const db = getFirestore();
 
 export default db;

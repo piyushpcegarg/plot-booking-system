@@ -1,14 +1,14 @@
-import { Color } from '@material-ui/lab/Alert';
+import { AlertColor } from '@mui/material/Alert';
 
 export enum StatusEnum {
   AVAILABLE = 'AVAILABLE',
-  BOOKED = 'BOOKED'
+  BOOKED = 'BOOKED',
 }
 
 export interface Notification {
   open: boolean;
   message?: string;
-  severity?: Color;
+  severity?: AlertColor;
 }
 
 interface Plot {
